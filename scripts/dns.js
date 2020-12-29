@@ -194,7 +194,9 @@ function parse_record_data(buffer, rtype, rclass, i, l)
 		break;
 	}
 	case "AAAA": {
-		data = buffer.slice(i, i+l);
+		data = buffer.slice(i, i+l).reduce((output, dat) =>
+			(output + ('0' + (dat & 0xff).toString(16)).slice(-2)),
+			'');
 		break;
 	}
 	case "OPT": {
