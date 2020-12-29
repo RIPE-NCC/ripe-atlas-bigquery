@@ -214,6 +214,12 @@ function parse_record_data(buffer, rtype, rclass, i, l)
 
 function parse_rr(buffer, i)
 {
+	// We definitely can't seek beyond the end of the buffer
+	if (i > buffer.length) {
+		return -1;
+	}
+
+
 	let rname = "";
 	let position = i;
 	let compression = false;
@@ -224,6 +230,12 @@ function parse_rr(buffer, i)
 		// header compression; this is referring to a name someplace else
 		if (length >= 192) {
 			position = ((length - 192) << 8) | parseInt(buffer[position++]);
+
+			// We definitely can't seek beyond the end of the buffer
+			if (position > buffer.length) {
+				return -1;
+			}
+
 			compression = true;
 			// set length for start of redirected string
 			length = parseInt(buffer[position++]);
@@ -273,7 +285,12 @@ function parse_rr_set(buffer, section, record_count, i, output)
 		let rrttl   = -1;
 		let rrname  = "";
 		let rrdata  = [];
-		[rrtype, rrclass, rrname, rrttl, rrdata, i] = parse_rr(buffer, i);
+		parsed = parse_rr(buffer, i);
+		if (parsed === -1) {
+			return -1;
+		}
+
+		[rrtype, rrclass, rrname, rrttl, rrdata, i] = parsed;
 
 		output.push( {"section": section, "type": rrtype, "class": rrclass, "ttl": rrttl, "name": rrname, "data": rrdata} );
 	}
@@ -330,13 +347,33 @@ function parse_wire_message(buffer)
 		output.push( {"section": "query", "type": qtype, "class": qclass, "name": qdata} );
 	}
 
-	i = parse_rr_set(buffer, "answer",     ancount, i, output);
-	i = parse_rr_set(buffer, "authority",  aucount, i, output);
-	i = parse_rr_set(buffer, "additional", adcount, i, output);
+	var bail_out = false;
 
+	i = parse_rr_set(buffer, "answer",     ancount, i, output);
+	if (i === -1) {
+		error = {"section": "parse error in answer section", "type": buffer.length, "class": i, "name": "parse error"};
+		output.push(error);
+			bail_out = true;
+	}
+	if (bail_out === false) {
+		i = parse_rr_set(buffer, "authority",  aucount, i, output);
+		if (i === -1) {
+			error = {"section": "parse error in auth section", "type": buffer.length, "class": i, "name": "parse error"};
+			output.push(error);
+			bail_out = true;
+		}
+	}
+	if (bail_out === false) {
+		i = parse_rr_set(buffer, "additional", adcount, i, output);
+		if (i === -1) {
+			error = {"section": "parse error in additional section", "type": buffer.length, "class": i, "name": "parse error"};
+			output.push(error);
+			bail_out = true;
+		}
+	}
 	if (buffer.length !== i) {
 		// pack an error and some state that may help debug
-		error = {"section": "parse error", "type": buffer.length, "class": i, "name": "bad buffer length"};
+		error = {"section": "parse error", "type": buffer.length, "class": i, "name": "bad buffer length (incomplete parse?)"};
 		output.push(error);
 	}
 
