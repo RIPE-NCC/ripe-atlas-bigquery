@@ -190,7 +190,7 @@ function parse_record_data(buffer, rtype, rclass, i, l)
 	 * Currently just returning a byte arrray. */
 	switch (rtype) {
 	case "A": {
-		data = buffer.slice(i, i+l);
+		data = buffer.slice(i, i+l).join(".");
 		break;
 	}
 	case "AAAA": {
