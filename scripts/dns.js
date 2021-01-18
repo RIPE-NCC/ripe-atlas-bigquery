@@ -310,25 +310,32 @@ function parse_wire_message(buffer)
 
 	const id      = parseInt((buffer[0]  << 8) | buffer[1]);
 
-	const flags   = parseInt((buffer[2]  << 8) | buffer[3]);
-	const flag_query_val           = parseInt((flags & 0x8000) >> 15);
-	const flag_opcode_val          = parseInt((flags & 0x7800) >> 11);
-	const flag_auth_val            = parseInt((flags & 0x0400) >> 10);
-	const flag_trunc_val           = parseInt((flags & 0x0200) >>  9);
-	const flag_recurse_desired_val = parseInt((flags & 0x0100) >>  8);
-	const flag_recurse_avail_val   = parseInt((flags & 0x0080) >>  7);
-	const flag_z_val               = parseInt((flags & 0x0070) >>  4);
-	const flag_rcode_val           = parseInt((flags & 0x000f)      );
+	const flags_field                = parseInt((buffer[2]  << 8) | buffer[3]);
+	const flag_query_val             = parseInt((flags_field & 0x8000) >> 15);
+	const flag_opcode_val            = parseInt((flags_field & 0x7800) >> 11);
+	const flag_auth_val              = parseInt((flags_field & 0x0400) >> 10);
+	const flag_trunc_val             = parseInt((flags_field & 0x0200) >>  9);
+	const flag_recursion_desired_val = parseInt((flags_field & 0x0100) >>  8);
+	const flag_recursion_avail_val   = parseInt((flags_field & 0x0080) >>  7);
+	const flag_z_val                 = parseInt((flags_field & 0x0070) >>  4);
+	const flag_rcode_val             = parseInt((flags_field & 0x000f)      );
 
-	const flag_query           = (flag_query_val === 0)           ? true : false;
-	const flag_opcode          = dns_opcodes[flag_opcode_val] || "Unassigned";
-	const flag_auth            = (flag_auth_val  === 1)           ? true : false;
-	const flag_trunc           = (flag_trunc_val === 1)           ? true : false;
-	const flag_recurse_desired = (flag_recurse_desired_val === 1) ? true : false;
-	const flag_recurse_avail   = (flag_recurse_avail_val   === 1) ? true : false;
-	const flag_z               = flag_z_val;
-	const flag_rcode           = dns_rcodes[flag_rcode_val] || "Unassigned/Reserved";
+	const flag_query                 = (flag_query_val === 0)             ? false : true;
+	const flag_auth                  = (flag_auth_val  === 1)             ? true : false;
+	const flag_trunc                 = (flag_trunc_val === 1)             ? true : false;
+	const flag_recursion_desired     = (flag_recursion_desired_val === 1) ? true : false;
+	const flag_recursion_avail       = (flag_recursion_avail_val   === 1) ? true : false;
+	const flag_z                     = flag_z_val;
 
+	const flags = {"query":                flag_query,
+			"auth":                flag_auth,
+			"trunc":               flag_trunc,
+			"recursion_desired":   flag_recursion_desired,
+			"recursion_available": flag_recursion_avail,
+			"z":                   flag_z};
+
+	const opcode  = dns_opcodes[flag_opcode_val] || "Unassigned";
+	const rcode   = dns_rcodes[flag_rcode_val]   || "Unassigned/Reserved";
 
 	const qdcount = parseInt((buffer[4]  << 8) | buffer[5]);
 	const ancount = parseInt((buffer[6]  << 8) | buffer[7]);
@@ -378,19 +385,15 @@ function parse_wire_message(buffer)
 	}
 
 	return {
-		"id":                   id,
-		"flag_query":           flag_query,
-		"flag_opcode":          flag_opcode,
-		"flag_auth":            flag_auth,
-		"flag_trunc":           flag_trunc,
-		"flag_recurse_desired": flag_recurse_desired,
-		"flag_recurse_avail":   flag_recurse_avail,
-		"flag_rcode":           flag_rcode,
-		"qdcount":              qdcount,
-		"ancount":              ancount,
-		"aucount":              aucount,
-		"adcount":              adcount,
-		"payload":              output
+		"id":      id,
+		"opcode":  opcode,
+		"rcode":   rcode,
+		"flags":   flags,
+		"qdcount": qdcount,
+		"ancount": ancount,
+		"aucount": aucount,
+		"adcount": adcount,
+		"payload": output
 	};
 }
 
@@ -399,16 +402,12 @@ function parse_query(buffer)
 	const tmp = parse_wire_message(buffer);
 
 	return {
-		"id":                   tmp.id,
-		"flag_query":           tmp.flag_query,
-		"flag_opcode":          tmp.flag_opcode,
-		"flag_auth":            tmp.flag_auth,
-		"flag_trunc":           tmp.flag_trunc,
-		"flag_recurse_desired": tmp.flag_recurse_desired,
-		"flag_recurse_avail":   tmp.flag_recurse_avail,
-		"flag_rcode":           tmp.flag_rcode,
-		"qdcount":              tmp.qdcount,
-		"payload":              tmp.payload
+		"id":      tmp.id,
+		"opcode":  tmp.opcode,
+		"rcode":   tmp.rcode,
+		"flags":   tmp.flags,
+		"qdcount": tmp.qdcount,
+		"payload": tmp.payload
 	};
 }
 
