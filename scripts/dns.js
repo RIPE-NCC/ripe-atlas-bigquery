@@ -219,22 +219,29 @@ function parse_rr(buffer, i)
 		return -1;
 	}
 
-
 	let rname = "";
 	let position = i;
 	let compression = false;
+
 	for ( ; position < buffer.length; ) {
 
 		let length = parseInt(buffer[position++]);
 
 		// header compression; this is referring to a name someplace else
+		// RFC1035, Section 4.1.4:
+		// The first two bits are ones.  This allows a pointer to be distinguished
+		// from a label, since the label must begin with two zero bits because
+		// labels are restricted to 63 octets or less.
 		if (length >= 192) {
-			position = ((length - 192) << 8) | parseInt(buffer[position++]);
+			const old_position = position;
+			const new_position = ((length - 192) << 8) | parseInt(buffer[position++]);
 
 			// We definitely can't seek beyond the end of the buffer
-			if (position > buffer.length) {
+			if (new_position > buffer.length) {
 				return -1;
 			}
+
+			position = new_position;
 
 			compression = true;
 			// set length for start of redirected string
@@ -246,7 +253,13 @@ function parse_rr(buffer, i)
 		}
 
 		for (let j = 0; j < length; j++) {
-			rname += String.fromCharCode( buffer[position] );
+			const character = String.fromCharCode( buffer[position] );
+			// We've found a null character, so probably the length is wrong.
+			// Rather than try to guess, just bail out.
+			if (character === '\0') {
+				return -1;
+			}
+			rname += character;
 			position++;
 		}
 		rname += ".";
@@ -279,7 +292,6 @@ function parse_rr(buffer, i)
 function parse_rr_set(buffer, section, record_count, i, output)
 {
 	for (let count = 0; count < record_count; count++) {
-		//print("["+count+"/"+record_count+"] "+section+": Parsing from ",i);
 		let rrtype  = -1;
 		let rrclass = -1;
 		let rrttl   = -1;
@@ -307,6 +319,30 @@ function parse_wire_message(buffer)
 	if (buffer.length < 12) {
 		return {'type':0, 'class':0, 'name':"", 'error':"short buffer"};
 	}
+
+
+	/* https://tools.ietf.org/html/rfc1035
+	 *
+	 * 4.1.1. Header section format
+	 * 
+	 * The header contains the following fields:
+	 * 
+	 *                                     1  1  1  1  1  1
+	 *       0  1  2  3  4  5  6  7  8  9  0  1  2  3  4  5
+	 *     +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+	 *     |                      ID                       |
+	 *     +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+	 *     |QR|   Opcode  |AA|TC|RD|RA|   Z    |   RCODE   |
+	 *     +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+	 *     |                    QDCOUNT                    |
+	 *     +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+	 *     |                    ANCOUNT                    |
+	 *     +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+	 *     |                    NSCOUNT                    |
+	 *     +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+	 *     |                    ARCOUNT                    |
+	 *     +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+	 */
 
 	const id      = parseInt((buffer[0]  << 8) | buffer[1]);
 
@@ -358,14 +394,14 @@ function parse_wire_message(buffer)
 
 	i = parse_rr_set(buffer, "answer",     ancount, i, output);
 	if (i === -1) {
-		error = {"section": "parse error in answer section", "type": buffer.length, "class": i, "name": "parse error"};
+		error = {"error": "parse error in answer section"};
 		output.push(error);
 			bail_out = true;
 	}
 	if (bail_out === false) {
 		i = parse_rr_set(buffer, "authority",  aucount, i, output);
 		if (i === -1) {
-			error = {"section": "parse error in auth section", "type": buffer.length, "class": i, "name": "parse error"};
+			error = {"error": "parse error in auth section"};
 			output.push(error);
 			bail_out = true;
 		}
@@ -373,14 +409,14 @@ function parse_wire_message(buffer)
 	if (bail_out === false) {
 		i = parse_rr_set(buffer, "additional", adcount, i, output);
 		if (i === -1) {
-			error = {"section": "parse error in additional section", "type": buffer.length, "class": i, "name": "parse error"};
+			error = {"error": "parse error in additional section"};
 			output.push(error);
 			bail_out = true;
 		}
 	}
-	if (buffer.length !== i) {
+	if (i !== -1 && buffer.length !== i) {
 		// pack an error and some state that may help debug
-		error = {"section": "parse error", "type": buffer.length, "class": i, "name": "bad buffer length (incomplete parse?)"};
+		error = {"error": "bad buffer length. Expected:"+buffer.length+", got:"+i+". Incomplete parse?"};
 		output.push(error);
 	}
 
