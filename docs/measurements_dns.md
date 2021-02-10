@@ -58,6 +58,10 @@ Notice that the DNS results contain the same `qbuf` and `abuf` fields that the R
 More on UDFs:
 https://cloud.google.com/bigquery/docs/reference/standard-sql/user-defined-functions
 
+Running from the command line is possible as follows:
+```
+bq query --project_id=<your project> --use_legacy_sql=false --udf_resource=gs://ripe-atlas-bigquery/scripts/dns.sql 'select dst_addr, query, parse_dns_buffer(TO_CODE_POINTS(FROM_BASE64(query))) query_parsed from `ripencc-atlas`.samples.dns where date(start_time) = "2020-10-21" and   query is not null'
+```
 
 ```sql
 CREATE TEMP FUNCTION parse_dns_buffer(buffer ARRAY<int64>)
