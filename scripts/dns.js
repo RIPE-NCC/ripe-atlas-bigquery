@@ -131,17 +131,56 @@ function map_rrclass(value)
 function parse_question(buffer, i)
 {
 	let qname = "";
-	for ( ; i < buffer.length; ) {
-		const length = parseInt(buffer[i++]);
+	let position = i;
+	let compression = false;
+
+	for ( ; position < buffer.length; ) {
+
+		let length = parseInt(buffer[position++]);
+
+		// header compression; this is referring to a name someplace else
+		// RFC1035, Section 4.1.4:
+		// The first two bits are ones.  This allows a pointer to be distinguished
+		// from a label, since the label must begin with two zero bits because
+		// labels are restricted to 63 octets or less.
+		if (length >= 192) {
+			const old_position = position;
+			const new_position = ((length - 192) << 8) | parseInt(buffer[position++]);
+
+			// We definitely can't seek beyond the end of the buffer
+			if (new_position > buffer.length) {
+				return -1;
+			}
+
+			position = new_position;
+
+			compression = true;
+			// set length for start of redirected string
+			length = parseInt(buffer[position++]);
+		}
+
 		if (length === 0) {
 			break;
 		}
 
 		for (let j = 0; j < length; j++) {
-			qname += String.fromCharCode( buffer[i] );
-			i++;
+			const character = String.fromCharCode( buffer[position] );
+			// We've found a null character, so probably the length is wrong.
+			// Rather than try to guess, just bail out.
+			if (character === '\0') {
+				return -1;
+			}
+			qname += character;
+			position++;
 		}
 		qname += ".";
+	}
+
+	if (compression === false) {
+		i = position;
+	}
+	else {
+		i += 2;
 	}
 
 	const qtype  = parseInt((buffer[i] << 8) | buffer[i+1]);
@@ -379,24 +418,34 @@ function parse_wire_message(buffer)
 	const adcount = parseInt((buffer[10] << 8) | buffer[11]);
 	let output = [];
 
-	let i = 12;
-	for (let count = 0; count < qdcount; count++) {
+	var bail_out = false;
 
+	let i = 12;
+	for (let count = 0; count < qdcount && bail_out === false; count++) {
 		let qtype  = -1;
 		let qclass = -1;
 		let qdata  = "";
-		[qtype, qclass, qdata, i] = parse_question(buffer, i);
-
-		output.push( {"section": "query", "type": qtype, "class": qclass, "name": qdata} );
+		out = parse_question(buffer, i);
+		if (out === -1) {
+			error = {"error": "parse error in question section"};
+			output.push(error);
+			bail_out = true;
+			i = -1;
+		}
+		else {
+			[qtype, qclass, qdata, i] = out;
+			output.push( {"section": "query", "type": qtype, "class": qclass, "name": qdata} );
+		}
 	}
 
-	var bail_out = false;
 
-	i = parse_rr_set(buffer, "answer",     ancount, i, output);
-	if (i === -1) {
-		error = {"error": "parse error in answer section"};
-		output.push(error);
+	if (bail_out === false) {
+		i = parse_rr_set(buffer, "answer",     ancount, i, output);
+		if (i === -1) {
+			error = {"error": "parse error in answer section"};
+			output.push(error);
 			bail_out = true;
+		}
 	}
 	if (bail_out === false) {
 		i = parse_rr_set(buffer, "authority",  aucount, i, output);
