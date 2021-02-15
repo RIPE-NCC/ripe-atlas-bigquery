@@ -257,6 +257,17 @@ function parse_record_data(buffer, rtype, rclass, i, l)
 		data = buffer.slice(i, i+l);
 		break;
 	}
+	case "NS": {
+		let out = parse_name(buffer, i);
+		if (out === -1) {
+			return -1;
+		}
+		[dname, i] = out;
+
+		data = dname;
+
+		break;
+	}
 	case "SOA": {
 		let out = parse_name(buffer, i);
 		if (out === -1) {
