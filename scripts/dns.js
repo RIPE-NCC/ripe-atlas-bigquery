@@ -175,6 +175,9 @@ function parse_question(buffer, i)
 		}
 		qname += ".";
 	}
+	if (qname.length == 0) {
+		qname += ".";
+	}
 
 	if (compression === false) {
 		i = position;
@@ -301,6 +304,9 @@ function parse_rr(buffer, i)
 			rname += character;
 			position++;
 		}
+		rname += ".";
+	}
+	if (rname.length == 0) {
 		rname += ".";
 	}
 
