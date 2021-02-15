@@ -83,7 +83,7 @@ const rrtype_table = {
 
 const rrclass_table = {
 	1: "IN",
-	2: "CH"
+	3: "CH"
 }
 
 const dns_opcodes = {
