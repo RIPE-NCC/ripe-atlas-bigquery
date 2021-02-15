@@ -128,9 +128,9 @@ function map_rrclass(value)
 	return rrclass_table[value] || value;
 }
 
-function parse_question(buffer, i)
+function parse_name(buffer, i)
 {
-	let qname = "";
+	let name = "";
 	let position = i;
 	let compression = false;
 
@@ -170,13 +170,13 @@ function parse_question(buffer, i)
 			if (character === '\0') {
 				return -1;
 			}
-			qname += character;
+			name += character;
 			position++;
 		}
-		qname += ".";
+		name += ".";
 	}
-	if (qname.length == 0) {
-		qname += ".";
+	if (name.length == 0) {
+		name += ".";
 	}
 
 	if (compression === false) {
@@ -185,6 +185,17 @@ function parse_question(buffer, i)
 	else {
 		i += 2;
 	}
+
+	return [name, i];
+}
+
+function parse_question(buffer, i)
+{
+	const out = parse_name(buffer, i);
+	if (out === -1) {
+		return -1;
+	}
+	[qname, i] = out;
 
 	const qtype  = map_rrtype(parseInt((buffer[i] << 8) | buffer[i+1]));
 	i += 2;
@@ -227,6 +238,7 @@ function parse_question(buffer, i)
 function parse_record_data(buffer, rtype, rclass, i, l)
 {
 	let data = [];
+	const end = i+l;
 
 	/* May be able to do something smart with some types here.
 	 * Currently just returning a byte arrray. */
@@ -245,6 +257,34 @@ function parse_record_data(buffer, rtype, rclass, i, l)
 		data = buffer.slice(i, i+l);
 		break;
 	}
+	case "SOA": {
+		let out = parse_name(buffer, i);
+		if (out === -1) {
+			return -1;
+		}
+		[mname, i] = out;
+
+		out = parse_name(buffer, i);
+		if (out === -1) {
+			return -1;
+		}
+		[rname, i] = out;
+
+		const serial = parseInt((buffer[i] << 24) | (buffer[i+1] << 16) |  (buffer[i+2] << 8) | buffer[i+3]);
+		i += 4;
+		const refresh = parseInt((buffer[i] << 24) | (buffer[i+1] << 16) |  (buffer[i+2] << 8) | buffer[i+3]);
+		i += 4;
+		const retry = parseInt((buffer[i] << 24) | (buffer[i+1] << 16) |  (buffer[i+2] << 8) | buffer[i+3]);
+		i += 4;
+		const expire = parseInt((buffer[i] << 24) | (buffer[i+1] << 16) |  (buffer[i+2] << 8) | buffer[i+3]);
+		i += 4;
+		const minimum = parseInt((buffer[i] << 24) | (buffer[i+1] << 16) |  (buffer[i+2] << 8) | buffer[i+3]);
+		i += 4;
+
+		data = mname + " " + rname + " " + serial + " " + refresh + " " + retry + " " + expire + " " + minimum;
+
+		break;
+	}
 	default: {
 		data = buffer.slice(i, i+l);
 	}
@@ -261,61 +301,67 @@ function parse_rr(buffer, i)
 		return -1;
 	}
 
-	let rname = "";
-	let position = i;
-	let compression = false;
-
-	for ( ; position < buffer.length; ) {
-
-		let length = parseInt(buffer[position++]);
-
-		// header compression; this is referring to a name someplace else
-		// RFC1035, Section 4.1.4:
-		// The first two bits are ones.  This allows a pointer to be distinguished
-		// from a label, since the label must begin with two zero bits because
-		// labels are restricted to 63 octets or less.
-		if (length >= 192) {
-			const old_position = position;
-			const new_position = ((length - 192) << 8) | parseInt(buffer[position++]);
-
-			// We definitely can't seek beyond the end of the buffer
-			if (new_position > buffer.length) {
-				return -1;
-			}
-
-			position = new_position;
-
-			compression = true;
-			// set length for start of redirected string
-			length = parseInt(buffer[position++]);
-		}
-
-		if (length === 0) {
-			break;
-		}
-
-		for (let j = 0; j < length; j++) {
-			const character = String.fromCharCode( buffer[position] );
-			// We've found a null character, so probably the length is wrong.
-			// Rather than try to guess, just bail out.
-			if (character === '\0') {
-				return -1;
-			}
-			rname += character;
-			position++;
-		}
-		rname += ".";
+	const out = parse_name(buffer, i);
+	if (out === -1) {
+		return -1;
 	}
-	if (rname.length == 0) {
-		rname += ".";
-	}
+	[rname, i] = out;
 
-	if (compression === false) {
-		i = position;
-	}
-	else {
-		i += 2;
-	}
+//	let rname = "";
+//	let position = i;
+//	let compression = false;
+//
+//	for ( ; position < buffer.length; ) {
+//
+//		let length = parseInt(buffer[position++]);
+//
+//		// header compression; this is referring to a name someplace else
+//		// RFC1035, Section 4.1.4:
+//		// The first two bits are ones.  This allows a pointer to be distinguished
+//		// from a label, since the label must begin with two zero bits because
+//		// labels are restricted to 63 octets or less.
+//		if (length >= 192) {
+//			const old_position = position;
+//			const new_position = ((length - 192) << 8) | parseInt(buffer[position++]);
+//
+//			// We definitely can't seek beyond the end of the buffer
+//			if (new_position > buffer.length) {
+//				return -1;
+//			}
+//
+//			position = new_position;
+//
+//			compression = true;
+//			// set length for start of redirected string
+//			length = parseInt(buffer[position++]);
+//		}
+//
+//		if (length === 0) {
+//			break;
+//		}
+//
+//		for (let j = 0; j < length; j++) {
+//			const character = String.fromCharCode( buffer[position] );
+//			// We've found a null character, so probably the length is wrong.
+//			// Rather than try to guess, just bail out.
+//			if (character === '\0') {
+//				return -1;
+//			}
+//			rname += character;
+//			position++;
+//		}
+//		rname += ".";
+//	}
+//	if (rname.length == 0) {
+//		rname += ".";
+//	}
+//
+//	if (compression === false) {
+//		i = position;
+//	}
+//	else {
+//		i += 2;
+//	}
 
 	const rtype  = map_rrtype(parseInt( (buffer[i] << 8) | buffer[i+1]));
 	i += 2;
