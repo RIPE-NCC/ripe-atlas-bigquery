@@ -183,9 +183,9 @@ function parse_question(buffer, i)
 		i += 2;
 	}
 
-	const qtype  = parseInt((buffer[i] << 8) | buffer[i+1]);
+	const qtype  = map_rrtype(parseInt((buffer[i] << 8) | buffer[i+1]));
 	i += 2;
-	const qclass = parseInt((buffer[i] << 8) | buffer[i+1]);
+	const qclass = map_rrclass(parseInt((buffer[i] << 8) | buffer[i+1]));
 	i += 2;
 
 	return [qtype, qclass, qname, i];
