@@ -251,6 +251,16 @@ function parse_record_data(buffer, rtype, rclass, i, l)
 		data = buffer.slice(i, i+l).reduce((output, dat) =>
 			(output + ('0' + (dat & 0xff).toString(16)).slice(-2)),
 			'');
+
+		data =  data.substring(0,4) + ":" +
+			data.substring(4,8) + ":" +
+			data.substring(8,12) + ":" +
+			data.substring(12,16) + ":" +
+			data.substring(16,20) + ":" +
+			data.substring(20,24) + ":" +
+			data.substring(24,28) + ":" +
+			data.substring(28,32)
+
 		break;
 	}
 	case "OPT": {
