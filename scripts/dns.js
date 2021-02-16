@@ -409,8 +409,11 @@ function parse_wire_message(buffer)
 	const flag_truncated_val         = parseInt((flags_field & 0x0200) >>  9);
 	const flag_recursion_desired_val = parseInt((flags_field & 0x0100) >>  8);
 	const flag_recursion_avail_val   = parseInt((flags_field & 0x0080) >>  7);
-	const flag_z_val                 = parseInt((flags_field & 0x0070) >>  4);
+	const flag_z_val                 = parseInt((flags_field & 0x0040) >>  6);
+	const flag_authentic_data_val    = parseInt((flags_field & 0x0020) >>  5);
+	const flag_checking_disabled_val = parseInt((flags_field & 0x0010) >>  4);
 	const flag_rcode_val             = parseInt((flags_field & 0x000f)      );
+
 
 	const flag_query                 = (flag_query_val === 0)             ? false : true;
 	const flag_authoritative         = (flag_authoritative_val  === 1)    ? true : false;
@@ -418,13 +421,17 @@ function parse_wire_message(buffer)
 	const flag_recursion_desired     = (flag_recursion_desired_val === 1) ? true : false;
 	const flag_recursion_avail       = (flag_recursion_avail_val   === 1) ? true : false;
 	const flag_z                     = flag_z_val;
+	const flag_authentic_data        = (flag_authentic_data_val === 1)    ? true : false;
+	const flag_checking_disabled     = (flag_checking_disabled_val === 1) ? true : false;
 
 	const flags = {"query":                 flag_query,
 			"authoritative_answer": flag_authoritative,
 			"truncated":            flag_truncated,
 			"recursion_desired":    flag_recursion_desired,
 			"recursion_available":  flag_recursion_avail,
-			"z":                    flag_z};
+			"z":                    flag_z,
+			"authentic_data":       flag_authentic_data,
+			"checking_disabled":    flag_checking_disabled};
 
 	const opcode  = dns_opcodes[flag_opcode_val] || "Unassigned";
 	const rcode   = dns_rcodes[flag_rcode_val]   || "Unassigned/Reserved";
