@@ -405,26 +405,26 @@ function parse_wire_message(buffer)
 	const flags_field                = parseInt((buffer[2]  << 8) | buffer[3]);
 	const flag_query_val             = parseInt((flags_field & 0x8000) >> 15);
 	const flag_opcode_val            = parseInt((flags_field & 0x7800) >> 11);
-	const flag_auth_val              = parseInt((flags_field & 0x0400) >> 10);
-	const flag_trunc_val             = parseInt((flags_field & 0x0200) >>  9);
+	const flag_authoritative_val     = parseInt((flags_field & 0x0400) >> 10);
+	const flag_truncated_val         = parseInt((flags_field & 0x0200) >>  9);
 	const flag_recursion_desired_val = parseInt((flags_field & 0x0100) >>  8);
 	const flag_recursion_avail_val   = parseInt((flags_field & 0x0080) >>  7);
 	const flag_z_val                 = parseInt((flags_field & 0x0070) >>  4);
 	const flag_rcode_val             = parseInt((flags_field & 0x000f)      );
 
 	const flag_query                 = (flag_query_val === 0)             ? false : true;
-	const flag_auth                  = (flag_auth_val  === 1)             ? true : false;
-	const flag_trunc                 = (flag_trunc_val === 1)             ? true : false;
+	const flag_authoritative         = (flag_authoritative_val  === 1)    ? true : false;
+	const flag_truncated             = (flag_truncated_val === 1)         ? true : false;
 	const flag_recursion_desired     = (flag_recursion_desired_val === 1) ? true : false;
 	const flag_recursion_avail       = (flag_recursion_avail_val   === 1) ? true : false;
 	const flag_z                     = flag_z_val;
 
-	const flags = {"query":                flag_query,
-			"auth":                flag_auth,
-			"trunc":               flag_trunc,
-			"recursion_desired":   flag_recursion_desired,
-			"recursion_available": flag_recursion_avail,
-			"z":                   flag_z};
+	const flags = {"query":                 flag_query,
+			"authoritative_answer": flag_authoritative,
+			"truncated":            flag_truncated,
+			"recursion_desired":    flag_recursion_desired,
+			"recursion_available":  flag_recursion_avail,
+			"z":                    flag_z};
 
 	const opcode  = dns_opcodes[flag_opcode_val] || "Unassigned";
 	const rcode   = dns_rcodes[flag_rcode_val]   || "Unassigned/Reserved";
