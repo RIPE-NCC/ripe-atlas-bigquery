@@ -306,6 +306,38 @@ function parse_record_data(buffer, rtype, rclass, i, l)
 
 		break;
 	}
+	case "TXT": {
+		let name = "";
+
+		for ( ; i < end; ) {
+			let length = parseInt(buffer[i++]);
+
+			if (length === 0) {
+				break;
+			}
+
+			name += "\"";
+
+			for (let j = 0; j < length; j++) {
+				const character = String.fromCharCode( buffer[i] );
+				// We've found a null character, so probably the length is wrong.
+				// Rather than try to guess, just bail out.
+				name += character;
+				i++;
+			}
+
+			name += "\"";
+			if (i < end) {
+				name += " ";
+			}
+		}
+
+		i += 2;
+
+		data = name;
+
+		break;
+	}
 	default: {
 		data = buffer.slice(i, i+l);
 	}
