@@ -403,38 +403,39 @@ function parse_wire_message(buffer)
 	const id      = parseInt((buffer[0]  << 8) | buffer[1]);
 
 	const flags_field                = parseInt((buffer[2]  << 8) | buffer[3]);
-	const flag_query_val             = parseInt((flags_field & 0x8000) >> 15);
+	const flag_query_val             = parseInt(flags_field & 0x8000);
 	const flag_opcode_val            = parseInt((flags_field & 0x7800) >> 11);
-	const flag_authoritative_val     = parseInt((flags_field & 0x0400) >> 10);
-	const flag_truncated_val         = parseInt((flags_field & 0x0200) >>  9);
-	const flag_recursion_desired_val = parseInt((flags_field & 0x0100) >>  8);
-	const flag_recursion_avail_val   = parseInt((flags_field & 0x0080) >>  7);
-	const flag_z_val                 = parseInt((flags_field & 0x0040) >>  6);
-	const flag_authentic_data_val    = parseInt((flags_field & 0x0020) >>  5);
-	const flag_checking_disabled_val = parseInt((flags_field & 0x0010) >>  4);
-	const flag_rcode_val             = parseInt((flags_field & 0x000f)      );
+	const flag_authoritative_val     = parseInt(flags_field & 0x0400);
+	const flag_truncated_val         = parseInt(flags_field & 0x0200);
+	const flag_recursion_desired_val = parseInt(flags_field & 0x0100);
+	const flag_recursion_avail_val   = parseInt(flags_field & 0x0080);
+	const flag_z_val                 = parseInt(flags_field & 0x0040);
+	const flag_authentic_data_val    = parseInt(flags_field & 0x0020);
+	const flag_checking_disabled_val = parseInt(flags_field & 0x0010);
+	const flag_rcode_val             = parseInt(flags_field & 0x000f);
 
-
-	const flag_query                 = (flag_query_val === 0)             ? false : true;
-	const flag_authoritative         = (flag_authoritative_val  === 1)    ? true : false;
-	const flag_truncated             = (flag_truncated_val === 1)         ? true : false;
-	const flag_recursion_desired     = (flag_recursion_desired_val === 1) ? true : false;
-	const flag_recursion_avail       = (flag_recursion_avail_val   === 1) ? true : false;
+	const flag_query                 = (flag_query_val === 0)             ? true : false;
+	const flag_authoritative         = (!flag_query ? ((flag_authoritative_val  === 0) ? false : true) : null);
+	const flag_truncated             = (flag_truncated_val === 0)         ? false : true;
+	const flag_recursion_desired     = (flag_recursion_desired_val === 0) ? false : true;
+	const flag_recursion_avail       = (flag_recursion_avail_val   === 0) ? false : true;
 	const flag_z                     = flag_z_val;
-	const flag_authentic_data        = (flag_authentic_data_val === 1)    ? true : false;
-	const flag_checking_disabled     = (flag_checking_disabled_val === 1) ? true : false;
+	const flag_authentic_data        = (flag_authentic_data_val === 0)    ? false : true;
+	const flag_checking_disabled     = (flag_checking_disabled_val === 0) ? false : true;
+	const flag_opcode                = (flag_query  ? dns_opcodes[flag_opcode_val] || "Unassigned"          : null);
+	const flag_rcode                 = (!flag_query ? dns_rcodes[flag_rcode_val]   || "Unassigned/Reserved" : null);
 
 	const flags = {"query":                 flag_query,
+			"opcode":               flag_opcode,
 			"authoritative_answer": flag_authoritative,
 			"truncated":            flag_truncated,
 			"recursion_desired":    flag_recursion_desired,
 			"recursion_available":  flag_recursion_avail,
 			"z":                    flag_z,
 			"authentic_data":       flag_authentic_data,
-			"checking_disabled":    flag_checking_disabled};
+			"checking_disabled":    flag_checking_disabled,
+			"rcode":                flag_rcode};
 
-	const opcode  = dns_opcodes[flag_opcode_val] || "Unassigned";
-	const rcode   = dns_rcodes[flag_rcode_val]   || "Unassigned/Reserved";
 
 	const qdcount = parseInt((buffer[4]  << 8) | buffer[5]);
 	const ancount = parseInt((buffer[6]  << 8) | buffer[7]);
@@ -495,8 +496,6 @@ function parse_wire_message(buffer)
 
 	return {
 		"id":      id,
-		"opcode":  opcode,
-		"rcode":   rcode,
 		"flags":   flags,
 		"qdcount": qdcount,
 		"ancount": ancount,
