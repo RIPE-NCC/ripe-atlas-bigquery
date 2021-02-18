@@ -138,6 +138,13 @@ function parse_name(buffer, i)
 
 		let length = parseInt(buffer[position++]);
 
+		if (length === 0) {
+			if (compression === false) {
+				i++;
+			}
+			break;
+		}
+
 		// header compression; this is referring to a name someplace else
 		// RFC1035, Section 4.1.4:
 		// The first two bits are ones.  This allows a pointer to be distinguished
@@ -154,13 +161,16 @@ function parse_name(buffer, i)
 
 			position = new_position;
 
-			compression = true;
+			if (compression === false) {
+				compression = true;
+
+				// two bytes describe the compression: compression flag + new_position
+				// compressed strings can themselves refer to compressed strings,
+				// so only increment once for the top level of the main stream
+				i += 2;
+			}
 			// set length for start of redirected string
 			length = parseInt(buffer[position++]);
-		}
-
-		if (length === 0) {
-			break;
 		}
 
 		for (let j = 0; j < length; j++) {
@@ -174,16 +184,12 @@ function parse_name(buffer, i)
 			position++;
 		}
 		name += ".";
+		if (compression === false) {
+			i = position;
+		}
 	}
 	if (name.length == 0) {
 		name += ".";
-	}
-
-	if (compression === false) {
-		i = position;
-	}
-	else {
-		i += 2;
 	}
 
 	return [name, i];
@@ -261,6 +267,10 @@ function parse_record_data(buffer, rtype, rclass, i, l)
 			data.substring(24,28) + ":" +
 			data.substring(28,32)
 
+		break;
+	}
+	case "CNAME": {
+		data = buffer.slice(i, i+1);
 		break;
 	}
 	case "OPT": {
