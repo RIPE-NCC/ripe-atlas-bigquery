@@ -246,8 +246,6 @@ function parse_record_data(buffer, rtype, rclass, i, l)
 	let data = [];
 	const end = i+l;
 
-	/* May be able to do something smart with some types here.
-	 * Currently just returning a byte arrray. */
 	switch (rtype) {
 	case "A": {
 		data = buffer.slice(i, i+l).join(".");
@@ -257,6 +255,11 @@ function parse_record_data(buffer, rtype, rclass, i, l)
 		data = buffer.slice(i, i+l).reduce((output, dat) =>
 			(output + ('0' + (dat & 0xff).toString(16)).slice(-2)),
 			'');
+		if (data.length != 32) {
+			// 32 hex digits == 128 bits
+			// if the length is less, the buffer is incomplete
+			return -1;
+		}
 
 		data =  data.substring(0,4) + ":" +
 			data.substring(4,8) + ":" +
@@ -270,7 +273,14 @@ function parse_record_data(buffer, rtype, rclass, i, l)
 		break;
 	}
 	case "CNAME": {
-		data = buffer.slice(i, i+1);
+		let out = parse_name(buffer, i);
+		if (out === -1) {
+			return -1;
+		}
+		[cname, i] = out;
+
+		data = cname;
+
 		break;
 	}
 	case "OPT": {
@@ -381,6 +391,10 @@ function parse_rr(buffer, i)
 	i += 2;
 
 	data = parse_record_data(buffer, rtype, rclass, i, l);
+	if (data === -1) {
+		// there was a parse error
+		return -1;
+	}
 
 	i += l;
 
