@@ -249,6 +249,17 @@ function parse_record_data(buffer, rtype, rclass, i, l)
 	switch (rtype) {
 	case "A": {
 		data = buffer.slice(i, i+l).join(".");
+
+		// Mash the IPv4 address into hex, so it should be 8 chars long.
+		// It's possible with a truncated buffer to not grab a full IP addr,
+		// which breaks calls to net.ip_from_string
+		const tmp_str = buffer.slice(i, i+l).reduce((output, dat) =>
+			(output + ('0' + (dat & 0xff).toString(16)).slice(-2)),
+			'');
+		if (tmp_str.length != 8) {i
+			return -1;
+		}
+
 		break;
 	}
 	case "AAAA": {
@@ -423,11 +434,40 @@ function parse_rr_set(buffer, section, record_count, i, output)
 }
 
 
+const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
+
+function atob(input)
+{
+	let str = input.replace(/=+$/, '');
+	let output = '';
+
+	if (str.length % 4 == 1) {
+		throw new Error("'atob' failed: The string to be decoded is not correctly encoded.");
+	}
+	for (let bc = 0, bs = 0, buffer, i = 0;
+		buffer = str.charAt(i++);
+		~buffer && (bs = bc % 4 ? bs * 64 + buffer : buffer, bc++ % 4) ? output += String.fromCharCode(255 & bs >> (-2 * bc & 6)) : 0) {
+		buffer = chars.indexOf(buffer);
+	}
+
+	let i = []
+	for (j = 0 ; j < output.length; j++) {
+		i.push(output.charCodeAt(j));
+	}
+
+	return i;
+}
+
+
+
 function parse_wire_message(buffer)
 {
 	if (buffer === null) {
 		return {'type':0, 'class':0, 'name':"", 'error':"null buffer"};
 	}
+
+	buffer = atob(buffer);
+
 	if (buffer.length < 12) {
 		return {'type':0, 'class':0, 'name':"", 'error':"short buffer"};
 	}
