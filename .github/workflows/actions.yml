@@ -6,6 +6,5 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
-      - run: cd tests
-      - run: npm install
-      - run: npm run test
+      - run: npm install && npm run test
+        working-directory: tests
