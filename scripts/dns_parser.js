@@ -615,3 +615,4 @@ function parse_query(buffer)
 	};
 }
 
+module.exports = parse_wire_message;
