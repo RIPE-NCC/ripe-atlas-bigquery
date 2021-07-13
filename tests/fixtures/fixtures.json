@@ -110923,7 +110923,7 @@
         "class": "IN",
         "ttl": 3600,
         "name": "dragons.aioy.eu.",
-        "data": "\"Here be ÿ dragons! With \\ and \" and \u007f\" \"as well.\" \"Throwing in  for good measure.\""
+        "data": "\"Here be ÿ dragons! With \\ and \" and \" \"as well.\" \"Throwing in  for good measure.\""
       },
       {
         "section": "authority",

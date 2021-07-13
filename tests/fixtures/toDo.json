@@ -1,0 +1,26 @@
+{
+  "qaCEAABAAEAAAAACGhvc3RuYW1lBGJpbmQAABAAA8AMABAAAwAAAAAACglubm4xLWxheDU=": {
+    "id": 43424,
+    "flags": {
+      "query": false,
+      "opcode": null,
+      "authoritative_answer": true,
+      "truncated": false,
+      "recursion_desired": false,
+      "recursion_available": false,
+      "z": 0,
+      "authentic_data": false,
+      "checking_disabled": false,
+      "rcode": "NoError"
+    },
+    "qdcount": 64,
+    "ancount": 64,
+    "aucount": 0,
+    "adcount": 2,
+    "payload": [
+      {
+        "error": "parse error in question section"
+      }
+    ]
+  }
+}
