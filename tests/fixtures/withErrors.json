@@ -1,0 +1,968 @@
+{
+  "NG6EAAABAAEADQAKAAAGAAEAAAYAAQABUYAAQAFhDHJvb3Qtc2VydmVycwNuZXQABW5zdGxkDHZlcmlzabdmLWdycwNjb20AeCoLNAAABwgAAAOEAAk6gAABUYAAAAIAAQAH6QAABAFrwB4AAAIAAQAH6QAABAFnwB4AAAIAAQAH6QAABAFiwB4AAAIAAQAH6QAAAsAcAAACAAEAB+kAAAQBbcAeAAACAAEAB+kAAAQBY8AeAAACAAEAB+kAAAQBZsAeAAACAAEAB+kAAAQBasAeAAACAAEAB+kAAAQBZcAeAAACAAEAB+kAAAQBZMAeAAACAAEAB+kAAAQBaMAeAAACAAEAB+l3d3d4sXeGd3d0dwgAB+kAAAQBbMAewGcAAQABADbugAAEwQAOgcBnABwAAQA27oAAECABB/0AAAAAAAAAAAAAAAHAdgABAAEANu6AAATAcCQEwIUAAQABADbugAAEwORPycCFABwAAQA27oAAECABBQAAhAAAAAAAAAAAAAvAHAABAAEANu6AAATGKQAEwBwAHAABADbugAAQIAEFA7o+AAAAAAAAAAIAMMChAAEAAQA27oAABMoMGyHAoQAcAAEANu6AABAgAQ38d3d3d3cAAAAAAAA1wLAAAQABADbugAAEwCEEDA==": {
+    "id": 13422,
+    "flags": {
+      "query": false,
+      "opcode": null,
+      "authoritative_answer": true,
+      "truncated": false,
+      "recursion_desired": false,
+      "recursion_available": false,
+      "z": 0,
+      "authentic_data": false,
+      "checking_disabled": false,
+      "rcode": "NoError"
+    },
+    "qdcount": 1,
+    "ancount": 1,
+    "aucount": 13,
+    "adcount": 10,
+    "payload": [
+      {
+        "section": "query",
+        "type": "SOA",
+        "class": "IN",
+        "name": "."
+      },
+      {
+        "section": "answer",
+        "type": "SOA",
+        "class": "IN",
+        "ttl": 86400,
+        "name": "nstld.verisi·f-grs.com.",
+        "data": "a.root-servers.net. nstld.verisi·f-grs.com. 2016021300 1800 900 604800 86400"
+      },
+      {
+        "section": "authority",
+        "type": "NS",
+        "class": "IN",
+        "ttl": 518400,
+        "name": ".",
+        "data": "k.root-servers.net."
+      },
+      {
+        "section": "authority",
+        "type": "NS",
+        "class": "IN",
+        "ttl": 518400,
+        "name": ".",
+        "data": "g.root-servers.net."
+      },
+      {
+        "section": "authority",
+        "type": "NS",
+        "class": "IN",
+        "ttl": 518400,
+        "name": ".",
+        "data": "b.root-servers.net."
+      },
+      {
+        "section": "authority",
+        "type": "NS",
+        "class": "IN",
+        "ttl": 518400,
+        "name": ".",
+        "data": "a.root-servers.net."
+      },
+      {
+        "section": "authority",
+        "type": "NS",
+        "class": "IN",
+        "ttl": 518400,
+        "name": ".",
+        "data": "m.root-servers.net."
+      },
+      {
+        "section": "authority",
+        "type": "NS",
+        "class": "IN",
+        "ttl": 518400,
+        "name": ".",
+        "data": "c.root-servers.net."
+      },
+      {
+        "section": "authority",
+        "type": "NS",
+        "class": "IN",
+        "ttl": 518400,
+        "name": ".",
+        "data": "f.root-servers.net."
+      },
+      {
+        "section": "authority",
+        "type": "NS",
+        "class": "IN",
+        "ttl": 518400,
+        "name": ".",
+        "data": "j.root-servers.net."
+      },
+      {
+        "section": "authority",
+        "type": "NS",
+        "class": "IN",
+        "ttl": 518400,
+        "name": ".",
+        "data": "e.root-servers.net."
+      },
+      {
+        "section": "authority",
+        "type": "NS",
+        "class": "IN",
+        "ttl": 518400,
+        "name": ".",
+        "data": "d.root-servers.net."
+      },
+      {
+        "section": "authority",
+        "type": "NS",
+        "class": "IN",
+        "ttl": 518400,
+        "name": ".",
+        "data": "h.root-servers.net."
+      },
+      {
+        "error": "parse error in auth section"
+      }
+    ]
+  },
+  "CcsAAAABAAAAAAABBHJpcGUDbmV0AAAcAAEAACkCAAAAgAAAAAAAAAA=": {
+    "id": 2507,
+    "flags": {
+      "query": true,
+      "opcode": "Query",
+      "authoritative_answer": null,
+      "truncated": false,
+      "recursion_desired": false,
+      "recursion_available": false,
+      "z": 0,
+      "authentic_data": false,
+      "checking_disabled": false,
+      "rcode": null
+    },
+    "qdcount": 1,
+    "ancount": 0,
+    "aucount": 0,
+    "adcount": 1,
+    "payload": [
+      {
+        "section": "query",
+        "type": "AAAA",
+        "class": "IN",
+        "name": "ripe.net."
+      },
+      {
+        "section": "additional",
+        "type": "OPT",
+        "class": 512,
+        "ttl": 32768,
+        "name": ".",
+        "data": ""
+      },
+      {
+        "error": "bad buffer length. Expected:41, got:37. Incomplete parse?"
+      }
+    ]
+  },
+  "IBKEAAABAAEABgACBWJhbmtzBWF0bGFzBHJpcGUDbmV0AAAcAAHADAAcAAEAAFRgABAgAQZ8AugAEQAAAADBABMxwBgAAgABAAAOEAAMA25zMwNuaWMCZnIAwEIAAgABAAAOEAAWA3ByaQdhdXRoZG5zBHJpcGUDbmV0AMBCAAIAAQAADhAADQRzZWMxBWFwbmljwHfAQgACAAEAAA4QAAcEc2VjM8CNwEIAAgABAAAOEAAQBnNucy1wYgNpc2MDb3JnAMBCAAIAAQAADhAAEQZ0aW5uaWUEYXJpbgNuZXQAwGYAAQABAAAOEAAEwQAJBcBmABwAAQAADhAAECABBnwA4AAAAAAAAAAAAAU=": {
+    "id": 8210,
+    "flags": {
+      "query": false,
+      "opcode": null,
+      "authoritative_answer": true,
+      "truncated": false,
+      "recursion_desired": false,
+      "recursion_available": false,
+      "z": 0,
+      "authentic_data": false,
+      "checking_disabled": false,
+      "rcode": "NoError"
+    },
+    "qdcount": 1,
+    "ancount": 1,
+    "aucount": 6,
+    "adcount": 2,
+    "payload": [
+      {
+        "section": "query",
+        "type": "AAAA",
+        "class": "IN",
+        "name": "banks.atlas.ripe.net."
+      },
+      {
+        "section": "answer",
+        "type": "AAAA",
+        "class": "IN",
+        "ttl": 21600,
+        "name": "banks.atlas.ripe.net.",
+        "data": "2001:067c:02e8:0011:0000:0000:c100:1331"
+      },
+      {
+        "section": "authority",
+        "type": "NS",
+        "class": "IN",
+        "ttl": 3600,
+        "name": "ripe.net.",
+        "data": "ns3.nic.fr."
+      },
+      {
+        "error": "parse error in auth section"
+      }
+    ]
+  },
+  "KMiBgAABAAEADQAQA3d3dwRyaXBlA25ldAAAAQABwAwAAQABAAAhYgAEwQAGi8AVAAIAAQACWfMAEQFmDGd0bGQtc2VydmVyc8AVwBUAAgABAAJZ8wAEAW3APMAVAAIAAQACWfMABAFswDzAFQACAAEAAlnzAAQBacA8wBUAAgABAAJZ8wAEAWHAPMAVAAIAAQACWfMABAFiwDzAFQACAAEAAlnzAAQBa8A8wBUAAgABAAJZ8wAEAWjAPMAVAAIAAQACWfMABAFjwDzAFQACAAEAAlnzAAQBZ8A8wBUAAgABAAJZ8wAEAWrAPMAVAAIAAQACWfMABAFkwDzAFQACAAEAAlnzAAQBZcA8wIcAAQABAAFKdAAEwAUGHsCHABwAAQABSnQAECABBQOoPgAAAAAAAAACADDAlwABAAEAAX6YAATAIQ4ewJcAHAABAAF+mAAQIAEFAyMdAAAAAAAAAAIAMMDHAAEAAQABiQMABMAaXB7A9wABAAEAAYbaAATAH1AewQcAAQABAAFKyQAEwAxeHsA6AAEAAQABSskABMAjMx7A1wABAAEAAXdwAATAKl0ewLcAAQABAAFjZgAEwDZwHsB3AAEAAQACaqkABMArrB7A5wABAAEAAeXzAATAME8ewKcAAQABAAFxiAAEwDSyHsBnAAEAAQABSnQABMA=": {
+    "id": 10440,
+    "flags": {
+      "query": false,
+      "opcode": null,
+      "authoritative_answer": false,
+      "truncated": false,
+      "recursion_desired": true,
+      "recursion_available": true,
+      "z": 0,
+      "authentic_data": false,
+      "checking_disabled": false,
+      "rcode": "NoError"
+    },
+    "qdcount": 1,
+    "ancount": 1,
+    "aucount": 13,
+    "adcount": 16,
+    "payload": [
+      {
+        "section": "query",
+        "type": "A",
+        "class": "IN",
+        "name": "www.ripe.net."
+      },
+      {
+        "section": "answer",
+        "type": "A",
+        "class": "IN",
+        "ttl": 8546,
+        "name": "www.ripe.net.",
+        "data": "193.0.6.139"
+      },
+      {
+        "section": "authority",
+        "type": "NS",
+        "class": "IN",
+        "ttl": 154099,
+        "name": "net.",
+        "data": "f.gtld-servers.net."
+      },
+      {
+        "section": "authority",
+        "type": "NS",
+        "class": "IN",
+        "ttl": 154099,
+        "name": "net.",
+        "data": "m.gtld-servers.net."
+      },
+      {
+        "section": "authority",
+        "type": "NS",
+        "class": "IN",
+        "ttl": 154099,
+        "name": "net.",
+        "data": "l.gtld-servers.net."
+      },
+      {
+        "section": "authority",
+        "type": "NS",
+        "class": "IN",
+        "ttl": 154099,
+        "name": "net.",
+        "data": "i.gtld-servers.net."
+      },
+      {
+        "section": "authority",
+        "type": "NS",
+        "class": "IN",
+        "ttl": 154099,
+        "name": "net.",
+        "data": "a.gtld-servers.net."
+      },
+      {
+        "section": "authority",
+        "type": "NS",
+        "class": "IN",
+        "ttl": 154099,
+        "name": "net.",
+        "data": "b.gtld-servers.net."
+      },
+      {
+        "section": "authority",
+        "type": "NS",
+        "class": "IN",
+        "ttl": 154099,
+        "name": "net.",
+        "data": "k.gtld-servers.net."
+      },
+      {
+        "section": "authority",
+        "type": "NS",
+        "class": "IN",
+        "ttl": 154099,
+        "name": "net.",
+        "data": "h.gtld-servers.net."
+      },
+      {
+        "section": "authority",
+        "type": "NS",
+        "class": "IN",
+        "ttl": 154099,
+        "name": "net.",
+        "data": "c.gtld-servers.net."
+      },
+      {
+        "section": "authority",
+        "type": "NS",
+        "class": "IN",
+        "ttl": 154099,
+        "name": "net.",
+        "data": "g.gtld-servers.net."
+      },
+      {
+        "section": "authority",
+        "type": "NS",
+        "class": "IN",
+        "ttl": 154099,
+        "name": "net.",
+        "data": "j.gtld-servers.net."
+      },
+      {
+        "section": "authority",
+        "type": "NS",
+        "class": "IN",
+        "ttl": 154099,
+        "name": "net.",
+        "data": "d.gtld-servers.net."
+      },
+      {
+        "section": "authority",
+        "type": "NS",
+        "class": "IN",
+        "ttl": 154099,
+        "name": "net.",
+        "data": "e.gtld-servers.net."
+      },
+      {
+        "section": "additional",
+        "type": "A",
+        "class": "IN",
+        "ttl": 84596,
+        "name": "a.gtld-servers.net.",
+        "data": "192.5.6.30"
+      },
+      {
+        "section": "additional",
+        "type": "AAAA",
+        "class": "IN",
+        "ttl": 84596,
+        "name": "a.gtld-servers.net.",
+        "data": "2001:0503:a83e:0000:0000:0000:0002:0030"
+      },
+      {
+        "section": "additional",
+        "type": "A",
+        "class": "IN",
+        "ttl": 97944,
+        "name": "b.gtld-servers.net.",
+        "data": "192.33.14.30"
+      },
+      {
+        "section": "additional",
+        "type": "AAAA",
+        "class": "IN",
+        "ttl": 97944,
+        "name": "b.gtld-servers.net.",
+        "data": "2001:0503:231d:0000:0000:0000:0002:0030"
+      },
+      {
+        "section": "additional",
+        "type": "A",
+        "class": "IN",
+        "ttl": 100611,
+        "name": "c.gtld-servers.net.",
+        "data": "192.26.92.30"
+      },
+      {
+        "section": "additional",
+        "type": "A",
+        "class": "IN",
+        "ttl": 100058,
+        "name": "d.gtld-servers.net.",
+        "data": "192.31.80.30"
+      },
+      {
+        "section": "additional",
+        "type": "A",
+        "class": "IN",
+        "ttl": 84681,
+        "name": "e.gtld-servers.net.",
+        "data": "192.12.94.30"
+      },
+      {
+        "section": "additional",
+        "type": "A",
+        "class": "IN",
+        "ttl": 84681,
+        "name": "f.gtld-servers.net.",
+        "data": "192.35.51.30"
+      },
+      {
+        "section": "additional",
+        "type": "A",
+        "class": "IN",
+        "ttl": 96112,
+        "name": "g.gtld-servers.net.",
+        "data": "192.42.93.30"
+      },
+      {
+        "section": "additional",
+        "type": "A",
+        "class": "IN",
+        "ttl": 90982,
+        "name": "h.gtld-servers.net.",
+        "data": "192.54.112.30"
+      },
+      {
+        "section": "additional",
+        "type": "A",
+        "class": "IN",
+        "ttl": 158377,
+        "name": "i.gtld-servers.net.",
+        "data": "192.43.172.30"
+      },
+      {
+        "section": "additional",
+        "type": "A",
+        "class": "IN",
+        "ttl": 124403,
+        "name": "j.gtld-servers.net.",
+        "data": "192.48.79.30"
+      },
+      {
+        "section": "additional",
+        "type": "A",
+        "class": "IN",
+        "ttl": 94600,
+        "name": "k.gtld-servers.net.",
+        "data": "192.52.178.30"
+      },
+      {
+        "error": "parse error in additional section"
+      }
+    ]
+  },
+  "KOcAAAABAAAAAAABBnN0ZXJlbwJocQZwaGljb2gDbmV0AAAQAAEAACkCAAAAAAAABAAIAAQAAQAA": {
+    "id": 10471,
+    "flags": {
+      "query": true,
+      "opcode": "Query",
+      "authoritative_answer": null,
+      "truncated": false,
+      "recursion_desired": false,
+      "recursion_available": false,
+      "z": 0,
+      "authentic_data": false,
+      "checking_disabled": false,
+      "rcode": null
+    },
+    "qdcount": 1,
+    "ancount": 0,
+    "aucount": 0,
+    "adcount": 1,
+    "payload": [
+      {
+        "section": "query",
+        "type": "TXT",
+        "class": "IN",
+        "name": "stereo.hq.phicoh.net."
+      },
+      {
+        "section": "additional",
+        "type": "OPT",
+        "class": 512,
+        "ttl": 0,
+        "name": ".",
+        "data": "0,8,0,4"
+      },
+      {
+        "error": "bad buffer length. Expected:57, got:53. Incomplete parse?"
+      }
+    ]
+  },
+  "ML+BgAABAAEAAAABA3d3dwRyaXBlA25ldAAAAQABwAwAAQABAAAA7gAEwQAGi8O7/Ndt9Mb/7dvz92f79w==": {
+    "id": 12479,
+    "flags": {
+      "query": false,
+      "opcode": null,
+      "authoritative_answer": false,
+      "truncated": false,
+      "recursion_desired": true,
+      "recursion_available": true,
+      "z": 0,
+      "authentic_data": false,
+      "checking_disabled": false,
+      "rcode": "NoError"
+    },
+    "qdcount": 1,
+    "ancount": 1,
+    "aucount": 0,
+    "adcount": 1,
+    "payload": [
+      {
+        "section": "query",
+        "type": "A",
+        "class": "IN",
+        "name": "www.ripe.net."
+      },
+      {
+        "section": "answer",
+        "type": "A",
+        "class": "IN",
+        "ttl": 238,
+        "name": "www.ripe.net.",
+        "data": "193.0.6.139"
+      },
+      {
+        "error": "parse error in additional section"
+      }
+    ]
+  },
+  "VkEBAAABAAAAAAABA3d3dwRyaXBlA25ldAAAAQABAAApAgAAAIAAAAAAAAAA": {
+    "id": 22081,
+    "flags": {
+      "query": true,
+      "opcode": "Query",
+      "authoritative_answer": null,
+      "truncated": false,
+      "recursion_desired": true,
+      "recursion_available": false,
+      "z": 0,
+      "authentic_data": false,
+      "checking_disabled": false,
+      "rcode": null
+    },
+    "qdcount": 1,
+    "ancount": 0,
+    "aucount": 0,
+    "adcount": 1,
+    "payload": [
+      {
+        "section": "query",
+        "type": "A",
+        "class": "IN",
+        "name": "www.ripe.net."
+      },
+      {
+        "section": "additional",
+        "type": "OPT",
+        "class": 512,
+        "ttl": 32768,
+        "name": ".",
+        "data": ""
+      },
+      {
+        "error": "bad buffer length. Expected:45, got:41. Incomplete parse?"
+      }
+    ]
+  },
+  "WC+BoAABAAIABwAFA3d3dwRyaXBlA25ldAAAAQABwAwAAQABAABRzQAEwQAGi8AMAC4AAQAAUc0AnAABBQMAAFRgU8jUG1OhOQstQwRyaXBlA25ldAAjuVBkX2JrdfzcpNjTX+iuHepGoBLQFh6jMHtJn+O5KTRF95OeBaggiQvO9sFXXU5Guav3cWQfnE+s+1P1Z/hzRACplE35HLI/wrklowjhMZP1xzaYBLkZ/x6WDZz98jYu8gyNVcqmTExwSH9tKtukGJLy2NHzPanrQJY6KvSwTcAQAAIAAQAAC30ADQRzZWMzBWFwbmljwBXAEAACAAEAAAt9AA4DcHJpB2F1dGhkbnPAEMAQAAIAAQAAC30ADgZ0aW5uaWUEYXJpbsAVwBAAAgABAAALfQAQBnNucy1wYgNpc2MDb3JnAMAQAAIAAQAAC30ABwRzZWMxwOfAEAACAAEAAAt9AAwDbnMzA25pYwJmcgDAEAAuAAEAAAt9AJwAAgUCAAAOEFPI1BtToTkLLUMEcmlwZQNuZXQAC4WMH46cBWT/hhWvVrStIdXrqHA2fwfphGkx9+6wbss+mHg8mbfKvaFfcg43/MZh/PwdyAQkRN8I+v/OZ1JA3Gt3KvDc00PebtQZBYlXxssZVNtcx45DG5a3M/RGzhqjM5hfuigLmghIEhuvMhtrhmC4WS/7B3KrYOenFQUJmxnA+wABAAEAAAaYAATBAAkFwPsAHAABAAAGmAAQIAEGfADgAAAAAAAAAAAABcD7": {
+    "id": 22575,
+    "flags": {
+      "query": false,
+      "opcode": null,
+      "authoritative_answer": false,
+      "truncated": false,
+      "recursion_desired": true,
+      "recursion_available": true,
+      "z": 0,
+      "authentic_data": true,
+      "checking_disabled": false,
+      "rcode": "NoError"
+    },
+    "qdcount": 1,
+    "ancount": 2,
+    "aucount": 7,
+    "adcount": 5,
+    "payload": [
+      {
+        "section": "query",
+        "type": "A",
+        "class": "IN",
+        "name": "www.ripe.net."
+      },
+      {
+        "section": "answer",
+        "type": "A",
+        "class": "IN",
+        "ttl": 20941,
+        "name": "www.ripe.net.",
+        "data": "193.0.6.139"
+      },
+      {
+        "section": "answer",
+        "type": "RRSIG",
+        "class": "IN",
+        "ttl": 20941,
+        "name": "www.ripe.net.",
+        "data": "0,1,5,3,0,0,84,96,83,200,212,27,83,161,57,11,45,67,4,114,105,112,101,3,110,101,116,0,35,185,80,100,95,98,107,117,252,220,164,216,211,95,232,174,29,234,70,160,18,208,22,30,163,48,123,73,159,227,185,41,52,69,247,147,158,5,168,32,137,11,206,246,193,87,93,78,70,185,171,247,113,100,31,156,79,172,251,83,245,103,248,115,68,0,169,148,77,249,28,178,63,194,185,37,163,8,225,49,147,245,199,54,152,4,185,25,255,30,150,13,156,253,242,54,46,242,12,141,85,202,166,76,76,112,72,127,109,42,219,164,24,146,242,216,209,243,61,169,235,64,150,58,42,244,176,77"
+      },
+      {
+        "section": "authority",
+        "type": "NS",
+        "class": "IN",
+        "ttl": 2941,
+        "name": "ripe.net.",
+        "data": "sec3.apnic.net."
+      },
+      {
+        "section": "authority",
+        "type": "NS",
+        "class": "IN",
+        "ttl": 2941,
+        "name": "ripe.net.",
+        "data": "pri.authdns.ripe.net."
+      },
+      {
+        "section": "authority",
+        "type": "NS",
+        "class": "IN",
+        "ttl": 2941,
+        "name": "ripe.net.",
+        "data": "tinnie.arin.net."
+      },
+      {
+        "section": "authority",
+        "type": "NS",
+        "class": "IN",
+        "ttl": 2941,
+        "name": "ripe.net.",
+        "data": "sns-pb.isc.org."
+      },
+      {
+        "section": "authority",
+        "type": "NS",
+        "class": "IN",
+        "ttl": 2941,
+        "name": "ripe.net.",
+        "data": "sec1.apnic.net."
+      },
+      {
+        "section": "authority",
+        "type": "NS",
+        "class": "IN",
+        "ttl": 2941,
+        "name": "ripe.net.",
+        "data": "ns3.nic.fr."
+      },
+      {
+        "section": "authority",
+        "type": "RRSIG",
+        "class": "IN",
+        "ttl": 2941,
+        "name": "ripe.net.",
+        "data": "0,2,5,2,0,0,14,16,83,200,212,27,83,161,57,11,45,67,4,114,105,112,101,3,110,101,116,0,11,133,140,31,142,156,5,100,255,134,21,175,86,180,173,33,213,235,168,112,54,127,7,233,132,105,49,247,238,176,110,203,62,152,120,60,153,183,202,189,161,95,114,14,55,252,198,97,252,252,29,200,4,36,68,223,8,250,255,206,103,82,64,220,107,119,42,240,220,211,67,222,110,212,25,5,137,87,198,203,25,84,219,92,199,142,67,27,150,183,51,244,70,206,26,163,51,152,95,186,40,11,154,8,72,18,27,175,50,27,107,134,96,184,89,47,251,7,114,171,96,231,167,21,5,9,155,25"
+      },
+      {
+        "section": "additional",
+        "type": "A",
+        "class": "IN",
+        "ttl": 1688,
+        "name": "pri.authdns.ripe.net.",
+        "data": "193.0.9.5"
+      },
+      {
+        "section": "additional",
+        "type": "AAAA",
+        "class": "IN",
+        "ttl": 1688,
+        "name": "pri.authdns.ripe.net.",
+        "data": "2001:067c:00e0:0000:0000:0000:0000:0005"
+      },
+      {
+        "section": "additional",
+        "type": 0,
+        "class": 0,
+        "ttl": 0,
+        "name": "pri.authdns.ripe.net.",
+        "data": ""
+      },
+      {
+        "error": "parse error in additional section"
+      }
+    ]
+  },
+  "sPIAAgdkcmFniW5zBFppb3kCZXUAABAAAQdkcmFnb24tBGFpb3kCZXUAABAAAQAAgRAATyVIZXJlIGJlIP8gZHJhZ29ucyQgV2l0aCBcIGFuZCAZIGFuZCB/CGFzIHcA/2wuH1Rocm93aW5nIGluIIAgZm9yIGdvO2SgbWVhc3VyZS7AKQAGAAEAAA4QAAYDbnMxQCnAKQACAAEAAA4RAAYDbnMywCnAlwABAAEAAA4QAAQAECABCIgQRAAQAqDJ//4=": {
+    "id": 45298,
+    "flags": {
+      "query": true,
+      "opcode": "Query",
+      "authoritative_answer": null,
+      "truncated": false,
+      "recursion_desired": false,
+      "recursion_available": false,
+      "z": 0,
+      "authentic_data": false,
+      "checking_disabled": false,
+      "rcode": null
+    },
+    "qdcount": 1892,
+    "ancount": 29281,
+    "aucount": 26505,
+    "adcount": 28275,
+    "payload": [
+      {
+        "section": "query",
+        "type": "TXT",
+        "class": "IN",
+        "name": "Zioy.eu."
+      },
+      {
+        "section": "query",
+        "type": "TXT",
+        "class": "IN",
+        "name": "dragon-.aioy.eu."
+      },
+      {
+        "section": "query",
+        "type": 129,
+        "class": 4096,
+        "name": "."
+      },
+      {
+        "error": "parse error in question section"
+      }
+    ]
+  },
+  "sPJ6AAABACEAAsICB1VyWGdviFEEYf//AAAQAAEPZHJhSm9uA/R/aW95AmV1AAAGAAEAAHv/VHUAABAAAQ9kcmFKAAAGAAEAAHv/9H9pb3lvbgP0f2lveQJldQAABgABAAAOcABPJUhlcuUgYmUgcwR/cyEGV2l0aENcP2HiAAJgIGFpbwJldQAABgABAAB7/1R1AAAQAAEPZHJhSm9fAmV1AQAQf2lveQJldQAABgABAAAOEAAAHAD///+AfwBpV2cgaW4ggCAAAnIgZ29vZP9tZWFzdXJlLsApDwIBAMApAAIAAQAVDjAABgNuczLAL8CXAAEAAQAADhD5lYAAAABzMsAvwJcAAQABAAAOEPmVEJcAAQAJGwAOEAAEEEQA7wGgyf/+": {
+    "id": 45298,
+    "flags": {
+      "query": true,
+      "opcode": "Unassigned",
+      "authoritative_answer": null,
+      "truncated": true,
+      "recursion_desired": false,
+      "recursion_available": false,
+      "z": 0,
+      "authentic_data": false,
+      "checking_disabled": false,
+      "rcode": null
+    },
+    "qdcount": 1,
+    "ancount": 33,
+    "aucount": 2,
+    "adcount": 49666,
+    "payload": [
+      {
+        "error": "parse error in question section"
+      }
+    ]
+  },
+  "sPJh////AAH+/voHZHIEYWJvcgR/Ym95AmVcfC7AczHAKcAKAAD+/jHAKcAKAAD+/v7+AN7e3t7e0t7eAAEAAAIQfwBuJQ8jwC7AKQACAAEAAAMQ/+RiZSD/IGQAAxaHABAgAQiI3s7e3t4FRAAQAqDJ//4=": {
+    "id": 45298,
+    "flags": {
+      "query": true,
+      "opcode": "Unassigned",
+      "authoritative_answer": null,
+      "truncated": false,
+      "recursion_desired": true,
+      "recursion_available": true,
+      "z": 64,
+      "authentic_data": true,
+      "checking_disabled": true,
+      "rcode": null
+    },
+    "qdcount": 65535,
+    "ancount": 1,
+    "aucount": 65278,
+    "adcount": 64007,
+    "payload": [
+      {
+        "error": "parse error in question section"
+      }
+    ]
+  },
+  "sPKAgAABAAYAAAAAwAwAAgABY8ARwAwA6P//fwAKrgAHBHNlYzPAK8AMAAIAAQAACq4ADgN9cmkHYXV0aGRuc8AMwAz4AQABAAAKrgAMA25zMwNuaWMCZnIAwAwAAgABAAAKrgAfBnNubS1wYgNpc2MDb3JnAMAMAAIAAQAACq4ADgZ0aW5uaWUE": {
+    "id": 45298,
+    "flags": {
+      "query": false,
+      "opcode": null,
+      "authoritative_answer": false,
+      "truncated": false,
+      "recursion_desired": false,
+      "recursion_available": true,
+      "z": 0,
+      "authentic_data": false,
+      "checking_disabled": false,
+      "rcode": "NoError"
+    },
+    "qdcount": 1,
+    "ancount": 6,
+    "aucount": 0,
+    "adcount": 0,
+    "payload": [
+      {
+        "error": "parse error in question section"
+      }
+    ]
+  },
+  "sPKD/+cBd2luZyBpZIByYWdvbnMEYWlveQJldQAAEAABB2RyYQNuczHAKcApAAIAAQAADhAABgNuczLAKcCXAAEAAWdvbnMEYWlveQJldQBPJUhlcmUgYmUg/yBkcmFnb25zISBXaXRoIFwgYW5kICIgYW5kIH8IYXMgd2VsbC4fVGhyb3dpbmcgaW4gH1RocmwuH1Rocm93aW5nIGluIB9UaHJvd2luZyBpbiCAb3dpbmcgaW4ggCBmb4AgZm9yIGdvb2QgbWVhc3VyZS7AKQACAAEAAA4QAAYDbnMxwCnAKQACAAEAAA4QAAYDbnMywCnAlwABAAEAAA4QAASCJQ8jwKkAHAABAAAOEAAQIAEIiBBEABACoMn//g==": {
+    "id": 45298,
+    "flags": {
+      "query": false,
+      "opcode": null,
+      "authoritative_answer": false,
+      "truncated": true,
+      "recursion_desired": true,
+      "recursion_available": true,
+      "z": 64,
+      "authentic_data": true,
+      "checking_disabled": true,
+      "rcode": "Unassigned/Reserved"
+    },
+    "qdcount": 59137,
+    "ancount": 30569,
+    "aucount": 28263,
+    "adcount": 8297,
+    "payload": [
+      {
+        "error": "parse error in question section"
+      }
+    ]
+  },
+  "sPKEAAABAAEAAgACB2RyYWdvbnMEYWlveQJldQAAEAABB2RyYWdvbnMEYWlveRJldQAAEAABAAAOEABPJUhlcmUgYmUg/yBkcmFnb25zISBXaXRoIFwgYW5kICIgYW5kIH8IYXMgd2VsbC4fVGhyb3dpbmcgaW4ggCBmb3IgZ29vZCBtZWFzdXJlLsApAAIAAQAADhAABgNuczHAKcApAAIAAQAADhAABgNuczLAKcCXAAEAAQAADhAABIIlDyPAqQAcAAEAAA4QABAgAQiIEEQAEAKgyf/+": {
+    "id": 45298,
+    "flags": {
+      "query": false,
+      "opcode": null,
+      "authoritative_answer": true,
+      "truncated": false,
+      "recursion_desired": false,
+      "recursion_available": false,
+      "z": 0,
+      "authentic_data": false,
+      "checking_disabled": false,
+      "rcode": "NoError"
+    },
+    "qdcount": 1,
+    "ancount": 1,
+    "aucount": 2,
+    "adcount": 2,
+    "payload": [
+      {
+        "section": "query",
+        "type": "TXT",
+        "class": "IN",
+        "name": "dragons.aioy.eu."
+      },
+      {
+        "error": "parse error in answer section"
+      }
+    ]
+  },
+  "sPKEAAABAAEAAgACB2RyYX5vbnPr6+vr6+vr6+vr6+vr62RyYWdvbnMEYWlveQJldQAAEAABAAAGAyBcIGFuZOgDAABugYGBgYGBgYGBgYGBgYGBgYF5gYGBgYGBYgB/CGEABgMgXCBhbmToAxQAbmQgfwhhcyB3ZWxsLh8AABAAAQAABgMgXCBhbmToAyBnUGV1AAAQAADnZHIBZ29ucwRhaW95AmV1AAAQAAEAAA4Ab2QgbQMgXCBhbmToAwAA/wEGAA4QAG5zMcApwCkAAhAgAQiI/0QAAQAADuEABgNuczLAKcCXABwAAQAADhAABIIlDyPfqQAcAAD9AA4QABAgAQiI/0QAEAKgyf/+": {
+    "id": 45298,
+    "flags": {
+      "query": false,
+      "opcode": null,
+      "authoritative_answer": true,
+      "truncated": false,
+      "recursion_desired": false,
+      "recursion_available": false,
+      "z": 0,
+      "authentic_data": false,
+      "checking_disabled": false,
+      "rcode": "NoError"
+    },
+    "qdcount": 1,
+    "ancount": 1,
+    "aucount": 2,
+    "adcount": 2,
+    "payload": [
+      {
+        "error": "parse error in question section"
+      }
+    ]
+  },
+  "sPKEAAABHgEQAgACBwFyYWdvbnMEYWlveQJlcQAAEAABB2RyYWdv1tbW1tbW1tbW1tZucwAA//95AmV1AAAwAAEAAA4QAE8lSF5yZSBiZSD/IGRyYTFvbnMhIFdpdGggXCBhbmQgIiBhbmQgfwhhcyB3ZWxsLh86aHJvd2luACBpbiCAIGZvciBnb4AAIG1lYXN3cmUuwCkAAgABAAAOEAAGA25zMeApwCkAAgABAAAOEAAGA25zMsApJQ8jwJoAHAABAAAOEAAQIAEIiBBEABACoMn//g==": {
+    "id": 45298,
+    "flags": {
+      "query": false,
+      "opcode": null,
+      "authoritative_answer": true,
+      "truncated": false,
+      "recursion_desired": false,
+      "recursion_available": false,
+      "z": 0,
+      "authentic_data": false,
+      "checking_disabled": false,
+      "rcode": "NoError"
+    },
+    "qdcount": 1,
+    "ancount": 7681,
+    "aucount": 4098,
+    "adcount": 2,
+    "payload": [
+      {
+        "section": "query",
+        "type": "TXT",
+        "class": "IN",
+        "name": "\u0001ragons.aioy.eq."
+      },
+      {
+        "error": "parse error in answer section"
+      }
+    ]
+  },
+  "sPKEAAABbmQgfwhhc2RyYWdvbnMEZWlveQJldQAAEAABB2RyYWcBbnMEYWlveQJldQAAEAABAAB1AAAQBwEAAA4QAE8lSGVyZSBiZW4AAAQAaXRoIFwgYW5kICIgYW5kIH8IYXMgd2VsbC4fVGhyEHdpbmcgaW4ggCBmb3IgZ29vZCBtZWFzdXJlLsApAAIAAQAADhAABgNuczHAKcApAAIAAQAADhAABgNuczLAKcCXAAEAAQAADhAABIIlDyPAqQAcAAEAAA4QABAgAQiIEEQAEAKgyf/+": {
+    "id": 45298,
+    "flags": {
+      "query": false,
+      "opcode": null,
+      "authoritative_answer": true,
+      "truncated": false,
+      "recursion_desired": false,
+      "recursion_available": false,
+      "z": 0,
+      "authentic_data": false,
+      "checking_disabled": false,
+      "rcode": "NoError"
+    },
+    "qdcount": 1,
+    "ancount": 28260,
+    "aucount": 8319,
+    "adcount": 2145,
+    "payload": [
+      {
+        "error": "parse error in question section"
+      }
+    ]
+  },
+  "sPKsrKysrKysZKysrKysrLusrKysrKysrKysKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoLCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgorKysrKy6rKysrKysrAA9PT0APT09PT09PT0jPT09PT09PT09PT09PT09PT09PSAAqD09PT09PT0BPT09Iz1WPT0oKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExKCgoKCgoKCgoKCgoKCgoKCgoKCgSKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCisrKysrKysrKysrKysAD3/////PT09PT09PSM9PT09PT09PT09PT09PT09PT09IACoPT09PT09PQE9PT0jPT09PUc9PT09PcApwCkAAgABAAAOEAAGDW5zMsApwIAAIT09PT09PT09ID09//8AAEAAPT09PT1HPT1aPT09PT09PT09PYA9PT09PT09PT09PT09LVE9PT09PT09IAA9PT09PT09PT09f////z09PT09PT09PT09RD09PT09ID098f8AAD09PT09PT1HPT09PT09PT09PT09PYA9PT09PSM9PT09Pf+Pj489PT09//9//z09PT09PT09PT09PT1ZPVBFPT09PT09PWQ9PTM9PT09PT09PT0yPT09PTY9PT09PT09PT0AAAB/bnMxwCnAKQACAAEAAA4QAAYDbnMywCnAgAAhAAEAAA4QAASCJQ8jwKkAHAAAAgAAZCAQIAIIrKysrKysrGSsrKysrKy7rKysrKysrKysrCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoAgICAgICAgICAigoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKKysrKysrKysrKysrKwAPT09AD09PT09PT09Iz09PT09PT09PT09PT09PT09PT0gAKg9PT09PT09AT09PSM9Vj09KCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKDExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMSgoKCgoKCgoKCgoKCgoKCgoKCgoEigoKCgoKCgoKCgoKCgoKCgoKCgoKCgorKysrKysrKysrKysrAA9PT0APT09PT09PT0jPT09PT09PT09PT09PT09PT09PSAAqD09PT09PT0BPT09Iz09PT1HPT09PT3AKcApAAIAAQAADhAABg1uczLAKcCAACE9PT09PT09PSA9Pf//AABAAD09PT09Rz09Wj09PT09PT09PT2APT09PT09PT09PT09PS1RPT09PT09PSAAPT09PT09PT09PX////89PT09PT09PT09PUQABAAAPSA9PfH/AAA9PT09PT09Rz09PT09PT09PT09PT2APT09PT0jPT09PT3/j4+PPT09Pf//f/89PT09PT09PT09PT09WT1QRT09PT09PT1kPT0zPT09PT09PT09Mj09PT02PT09PT09PT09AAAAf25zMcApwCkAAgABAAAOEAAGA25zMsApwIAAIQABAAAOEAAEgiUPghBEABACoMn//g==": {
+    "id": 45298,
+    "flags": {
+      "query": false,
+      "opcode": null,
+      "authoritative_answer": true,
+      "truncated": false,
+      "recursion_desired": false,
+      "recursion_available": true,
+      "z": 0,
+      "authentic_data": true,
+      "checking_disabled": false,
+      "rcode": "Unassigned/Reserved"
+    },
+    "qdcount": 44204,
+    "ancount": 44204,
+    "aucount": 44132,
+    "adcount": 44204,
+    "payload": [
+      {
+        "error": "parse error in question section"
+      }
+    ]
+  }
+}
