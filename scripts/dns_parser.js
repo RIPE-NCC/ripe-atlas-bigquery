@@ -188,7 +188,7 @@ function parse_name(buffer, i)
 			i = position;
 		}
 	}
-	if (name.length == 0) {
+	if (name.length === 0) {
 		name += ".";
 	}
 
@@ -256,7 +256,7 @@ function parse_record_data(buffer, rtype, rclass, i, l)
 		const tmp_str = buffer.slice(i, i+l).reduce((output, dat) =>
 			(output + ('0' + (dat & 0xff).toString(16)).slice(-2)),
 			'');
-		if (tmp_str.length != 8) {i
+		if (tmp_str.length !== 8) {i
 			return -1;
 		}
 
@@ -266,7 +266,7 @@ function parse_record_data(buffer, rtype, rclass, i, l)
 		data = buffer.slice(i, i+l).reduce((output, dat) =>
 			(output + ('0' + (dat & 0xff).toString(16)).slice(-2)),
 			'');
-		if (data.length != 32) {
+		if (data.length !== 32) {
 			// 32 hex digits == 128 bits
 			// if the length is less, the buffer is incomplete
 			return -1;
@@ -441,7 +441,7 @@ function atob(input)
 	let str = input.replace(/=+$/, '');
 	let output = '';
 
-	if (str.length % 4 == 1) {
+	if (str.length % 4 === 1) {
 		throw new Error("'atob' failed: The string to be decoded is not correctly encoded.");
 	}
 	for (let bc = 0, bs = 0, buffer, i = 0;
@@ -539,7 +539,7 @@ function parse_wire_message(buffer)
 	const adcount = parseInt((buffer[10] << 8) | buffer[11]);
 	let output = [];
 
-	var bail_out = false;
+	let bail_out = false;
 
 	let i = 12;
 	for (let count = 0; count < qdcount && bail_out === false; count++) {
