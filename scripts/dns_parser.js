@@ -615,4 +615,5 @@ function parse_query(buffer)
 	};
 }
 
+module = typeof(module) === 'undefined' ? {} : module;
 module.exports = parse_wire_message;
