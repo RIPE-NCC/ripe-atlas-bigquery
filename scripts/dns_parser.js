@@ -117,11 +117,21 @@ const dns_rcodes = {
 	22: "BADTRUNC",
 	23: "BADCOOKIE"
 }
+const option_type = {
+    3: "NSID" // Add other fields 
+}
+
 
 function map_rrtype(value)
 {
 	return rrtype_table[value] || value;
 }
+
+function map_rrtype_edns0(value)
+{
+    return option_type[value] || value;
+}
+
 
 function map_rrclass(value)
 {
@@ -130,7 +140,7 @@ function map_rrclass(value)
 
 function parse_name(buffer, i)
 {
-	let name = "";
+    let name = "";
 	let position = i;
 	let compression = false;
 
@@ -189,8 +199,8 @@ function parse_name(buffer, i)
 		}
 	}
 	if (name.length === 0) {
-		name += ".";
-	}
+        name += ".";
+    }
 
 	return [name, i];
 }
@@ -246,6 +256,8 @@ function parse_record_data(buffer, rtype, rclass, i, l)
 	let data = [];
 	const end = i+l;
 
+    
+
 	switch (rtype) {
 	case "A": {
 		data = buffer.slice(i, i+l).join(".");
@@ -284,7 +296,9 @@ function parse_record_data(buffer, rtype, rclass, i, l)
 		break;
 	}
 	case "CNAME": {
-		let out = parse_name(buffer, i);
+		let out = 
+
+        parse_name(buffer, i);
 		if (out === -1) {
 			return -1;
 		}
@@ -295,8 +309,27 @@ function parse_record_data(buffer, rtype, rclass, i, l)
 		break;
 	}
 	case "OPT": {
-		data = buffer.slice(i, i+l);
-		break;
+		
+        data = buffer.slice(i, i+l);
+		offset = 1;
+        let name ="";
+        code = data[offset];
+        if (code ===3) //only parsing for nsid
+        {
+            offset +=2;
+            length = data[offset];
+            if (length === 0) {                 
+                break; 
+            }
+            offset +=1;
+            for (let j = 0; j < length; j++) {
+                const character = String.fromCharCode( data[j+offset] );
+                name += character;
+            }
+            data=name;
+        }
+        break;
+        
 	}
 	case "NS": {
 		let out = parse_name(buffer, i);
@@ -389,10 +422,12 @@ function parse_rr(buffer, i)
 	if (out === -1) {
 		return -1;
 	}
+
 	[rname, i] = out;
 
 	const rtype  = map_rrtype(parseInt( (buffer[i] << 8) | buffer[i+1]));
 	i += 2;
+
 	const rclass = map_rrclass(parseInt((buffer[i] << 8) | buffer[i+1]));
 	i += 2;
 	const ttl = parseInt((buffer[i] << 24) | (buffer[i+1] << 16) |  (buffer[i+2] << 8) | buffer[i+3]);
@@ -406,6 +441,10 @@ function parse_rr(buffer, i)
 		// there was a parse error
 		return -1;
 	}
+    if (rtype ==='OPT')
+    {
+        rname = option_type[buffer[i+1]] || "."
+    }
 
 	i += l;
 
@@ -531,6 +570,7 @@ function parse_wire_message(buffer)
 			"authentic_data":       flag_authentic_data,
 			"checking_disabled":    flag_checking_disabled,
 			"rcode":                flag_rcode};
+
 
 
 	const qdcount = parseInt((buffer[4]  << 8) | buffer[5]);
