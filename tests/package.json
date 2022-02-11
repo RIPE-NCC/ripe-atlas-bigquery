@@ -1,7 +1,7 @@
 {
   "scripts": {
-    "test": "jest",
-    "fixtures": "jest fixtures"
+    "test": "jest dns_parser.test.js",
+    "fixtures": "jest fixtures.test.js"
   },
   "devDependencies": {
     "jest": "^27.0.6"
