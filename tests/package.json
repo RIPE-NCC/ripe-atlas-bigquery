@@ -1,8 +1,10 @@
 {
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "fixtures": "jest fixtures"
   },
   "devDependencies": {
     "jest": "^27.0.6"
-  }
+  },
+  "dependencies": {}
 }
